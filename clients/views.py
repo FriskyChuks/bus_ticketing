@@ -2,6 +2,8 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate,login
 from django.contrib.auth import logout
+from django.contrib import messages
+from django.http import JsonResponse
 
 from .models import *
 
@@ -49,6 +51,7 @@ def logout_view(request):
 def load_wallet_view(request,user_id):
     wallet = Wallet.objects.get(user_id=user_id)
     account_balance = wallet.account_balance
+    pay = 2000
     
     if request.POST:
         amount = request.POST.get('amount')
@@ -57,4 +60,13 @@ def load_wallet_view(request,user_id):
             account_balance=(account_balance+int(amount)))
         return redirect('load_wallet', user_id)
 
-    return render(request, 'load_wallet.html', {'account_balance':account_balance})
+    # return JsonResponse(account_balance, safe=False)
+    context = {'account_balance':account_balance,"pay":pay}
+    return render(request, 'load_wallet.html', context)
+
+
+def confirm_load_wallet(request,user_id):
+    messages.success(request, "Payment successful!")
+    print('Successful')
+    return redirect('home')
+    

@@ -28,6 +28,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'clients',
+    'mobilities',
+    
     'django.contrib.humanize',
 ]
 

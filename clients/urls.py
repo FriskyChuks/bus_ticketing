@@ -8,4 +8,5 @@ urlpatterns = [
     path('login/',login_view, name='login_view'),
     path('logout_view/',logout_view, name='logout_view'),
     path('load_wallet/<int:user_id>/',load_wallet_view, name='load_wallet'),
+    path('confirm_load_wallet/<int:user_id>/',confirm_load_wallet, name='confirm_load_wallet'),
 ]
